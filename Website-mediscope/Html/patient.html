@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="min-h-screen bg-gray-100">
+
+<!-- Sidebar -->
+<div class="fixed left-0 top-0 h-full w-20 bg-teal-600 flex flex-col items-center py-8">
+  <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+      <span class="text-teal-600 text-2xl font-bold">+</span>
+  </div>
+  <nav class="flex flex-col items-center flex-grow justify-center space-y-12">
+      <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg shadow cursor-pointer hover:bg-gray-200 transition">
+          <a href="http://127.0.0.1:5500/home.html" target="_blank">🏠</a>
+      </div>
+      <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg shadow cursor-pointer hover:bg-gray-200 transition">
+          <a href="http://127.0.0.1:5500/patient.html">👤</a>
+      </div>
+      <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg shadow cursor-pointer hover:bg-gray-200 transition">
+          <a href="#">🔔</a>
+      </div>
+      <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg shadow cursor-pointer hover:bg-gray-200 transition">
+          <a href="#">📅</a>
+      </div>
+      <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg shadow cursor-pointer hover:bg-gray-200 transition">
+          <a href="#">⚙️</a>
+      </div>
+  </nav>
+</div>
+
+<main class="ml-20 p-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-8">
+                <div class="p-6 flex flex-col items-center bg-white rounded-lg shadow">
+                    <div class="w-16 h-16 rounded-full overflow-hidden">
+                        <img src="profile.jpeg" alt="Profile" class="w-full h-full">
+                    </div>
+                    <h2 class="mt-4 font-semibold text-lg">Abhik Bangera</h2>
+                    <p class="text-sm text-gray-500">Patient ID #23456</p>
+                    <div class="mt-6 w-full grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-xl font-bold">120</p>
+                            <p class="text-xs text-gray-500">Heart Rate</p>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold">98%</p>
+                            <p class="text-xs text-gray-500">Oxygen</p>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold">36.6°C</p>
+                            <p class="text-xs text-gray-500">Temperature</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Recent Examinations</h3>
+                    <ul class="mt-4 space-y-2 text-gray-600">
+                        <li>✔ Blood Test - Normal</li>
+                        <li>✔ X-Ray - No Issues</li>
+                        <li>⚠ MRI - Further Review Needed</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="md:col-span-2">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Health Data Overview</h3>
+                    <p class="text-gray-600 mt-2">Graphical representation of vital statistics.</p>
+                    <div class="mt-4 h-64">
+                        <canvas id="healthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    const ctx = document.getElementById('healthChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            datasets: [
+                {
+                    label: 'Heart Rate (bpm)',
+                    data: [80, 85, 78, 82, 88, 90, 86],
+                    borderColor: 'red',
+                    fill: false,
+                },
+                {
+                    label: 'Oxygen Level (%)',
+                    data: [97, 98, 96, 97, 98, 99, 97],
+                    borderColor: 'blue',
+                    fill: false,
+                },
+                {
+                    label: 'Temperature (°C)',
+                    data: [36.5, 36.6, 36.4, 36.7, 36.6, 36.8, 36.5],
+                    borderColor: 'green',
+                    fill: false,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
